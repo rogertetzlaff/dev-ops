@@ -8,6 +8,7 @@ env:
   USER: test123
   TARGET: test123@cassini.cs.kent.edu
   RUN: ssh -o LogLevel=ERROR -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no test123@cassini.cs.kent.edu
+  COPY: scp -o LogLevel=ERROR -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
 jobs:
   deployment:
@@ -33,3 +34,7 @@ jobs:
           $RUN pwd
           echo $ $RUN ls -la 
           $RUN ls -la 
+
+      - name: Deploy the hello page
+        run: |
+          $COPY index.html $TARGET:. 
